@@ -1,0 +1,21 @@
+cls
+if not %version%==8 goto notcompatible
+:relaunch
+echo Ordner-ID Eingeben (Beispiel: 1)
+set /p progfol=Progfol Eingeben: 
+echo Unterordner-ID Eingeben (Beispiel: 1)
+set /p progopt=Progopt Eingeben: 
+set backcmd=goto loadprogopt
+goto :EOF
+
+:notcompatible
+cls
+echo Es kann sein das dieses Programm nicht mit deiner Version kompatibel ist. Möchtest du trotzdem Fortfahren? (y/n)
+set /p opt=Opt: 
+if %opt%==y goto relaunch
+if %opt%==n goto forceexit
+goto notcompatible
+
+:forceexit
+set backcmd=goto directlogin
+goto :EOF

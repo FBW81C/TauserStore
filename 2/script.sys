@@ -1,0 +1,5 @@
+cls
+echo Kommt Bald!
+pause
+set backcmd=goto loadstore
+goto :EOF

@@ -1,0 +1,50 @@
+:settings
+cls
+echo Einstellungen
+if not exist "%ProgramFiles%"\Ungenickt\Store echo 1) Ungenickt Store Installieren
+if exist "%ProgramFiles%"\Ungenickt\Store echo 1) Ungenickt Store Deinstallieren
+echo 2) Download Verlauf Ansehen
+echo 3) Sprungpunkt Verwenden
+echo 4) CMD Verwenden
+echo 5) Admin-Modus
+echo 6) Verlassen
+set /p opt=Opt: 
+if %opt%==1 goto check1
+if %opt%==2 goto viewdownloadhistory
+if %opt%==3 goto jumppoint
+if %opt%==4 goto cmd
+if %opt%==5 goto adminmode
+if %opt%==6 goto exit
+
+:jumppoint
+set /p jumpto=Sprungpunkt Festlegen: 
+set backcmd=goto %jumpto%
+goto :EOF
+
+:check1
+echo Kommt Bald!
+pause
+goto settings
+
+:viewdownloadhistory
+echo Kommt Bald!
+pause
+goto settings
+
+:cmd
+cls
+echo CMD Modus!
+echo Benutze goto settings um Zurückzukehren.
+:a
+set /p cmd="%cd%>"
+%cmd%
+goto a
+
+:adminmode
+cls
+set /p user=Benutzername: 
+set /p pw=Passwort: 
+
+:exit
+set backcmd=goto directlogin
+goto :EOF

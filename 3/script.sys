@@ -1,0 +1,2 @@
+set backcmd=exit
+goto :EOF
