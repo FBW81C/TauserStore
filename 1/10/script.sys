@@ -44,6 +44,7 @@ echo Installing...
 echo VLC Media Player>"%portiworkdir%\Applications\%current%\name.sys"
 echo Moving files...
 for /D %%A in ("%portiworkdir%\Applications\%current%\vlc-3.0.18\*") do move %%A "%portiworkdir%\Applications\%current%\"
+move "%portiworkdir%\Applications\%current%\vlc-3.0.18\*" "%portiworkdir%\Applications\%current%\"
 echo Done!
 pause
 goto :EOF
