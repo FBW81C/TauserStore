@@ -1,0 +1,23 @@
+@echo off
+if not DEFINED useporti goto onlyforporti
+if %useporti%==0 goto onlyforporti
+goto main
+
+:onlyforporti
+cls
+echo Sorry, this application only works with Porti.
+pause
+goto :EOF
+
+:main
+cls
+echo This will download the installation package in your Applications folder.
+echo Proceed? (y/n)
+set /p opt=Opt: 
+if %opt%==y goto download
+if %opt%==n goto :EOF
+goto main
+
+:download
+cls
+echo Downloading...
