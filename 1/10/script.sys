@@ -39,3 +39,9 @@ powershell Expand-Archive "%portiworkdir%\VLC.zip" -DestinationPath "%portiworkd
 echo Deleting ZIP file...
 del "%portiworkdir%\VLC.zip" /Q /F
 echo Downloading exec file...
+%newuserprofile%\Ungenickt\wget.exe https://raw.githubusercontent.com/FBW81C/TauserStore/main/1/10/copystring.sys -O "%portiworkdir%\Applications\%current%\exec.sys"
+echo Installing...
+echo VLC Media Player>"%portiworkdir%\Applications\%current%\name.sys"
+echo Done!
+pause
+goto :EOF
