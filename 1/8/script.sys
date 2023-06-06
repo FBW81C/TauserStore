@@ -1,0 +1,39 @@
+@echo off
+if not defined useporti goto notsupported
+if %useporti%==0 goto notsupported
+goto continue
+
+:notsupported
+cls
+echo This Application is only made for Porti.
+pause
+goto :EOF
+
+:cotinue
+cls
+echo This will download OpenJDK Microsoft Build for Porti in the Porti Workdir (%portiworkdir%)
+echo Do you want to continue? (y/n)
+set /p opt=Opt: 
+if %opt%==y goto downloadjava
+if %opt%==n goto :EOF
+goto continue
+
+:downloadjava
+rem powershell Expand-Archive microsoft-jdk-17.0.7-windows-x64.zip -DestinationPath %cd%\Java
+echo Step 1: Downloading Java from https://aka.ms/download-jdk/microsoft-jdk-17.0.7-windows-x64.zip ...
+%newuserprofile%\Ungenickt\wget.exe https://aka.ms/download-jdk/microsoft-jdk-17.0.7-windows-x64.zip -O "%portiworkdir%\Java.zip"
+echo Step 2: Extracting ...
+powershell Expand-Archive "%portiworkdir%\Java.zip" -DestinationPath "%portiworkdir%\Java"
+if not exist "%portiworkdir%\Java" goto oldpowershell
+echo Step 3: Deleting Java.zip ...
+del "%portiworkdir%\Java.zip" /Q /F
+echo Done!
+pause
+goto :EOF
+
+:oldpowershell
+echo Unable to extract zip archive. Please Extract the .zip file in %portiworkdir% manually
+echo into the Java folder on the same directory (%portiworkdir%)
+echo After that you should be done and all your Java applications should work in Porti.
+pause
+goto :EOF
