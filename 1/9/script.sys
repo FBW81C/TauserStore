@@ -34,6 +34,8 @@ echo Downloading... (1/2)
 %newuserprofile%\Ungenickt\wget.exe https://download.anydesk.com/AnyDesk.exe -O "%portiworkdir%\Applications\%current%\AnyDesk.exe"
 echo Downloading... (2/2)
 %newuserprofile%\Ungenickt\wget.exe https://raw.githubusercontent.com/FBW81C/TauserStore/main/1/9/copystring.sys -O "%portiworkdir%\Applications\%current%\exec.sys"
+echo Installing...
+echo AnyDesk>"%portiworkdir%\Applications\%current%\name.sys"
 echo Done!
 pause
 goto :EOF
