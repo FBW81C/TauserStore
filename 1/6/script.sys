@@ -1,8 +1,8 @@
 ﻿:home
 cls
-echo Es wird TauserTool von Gibthub heruntergeladen.
-echo Dateien von Github werden nicht überprüft.
-echo TauserTool herunterladen? (y/n)
+echo This will download TauserTool from Github.
+echo We do not check files from Github.
+echo Download anyway? (y/n)
 set /p opt=Opt: 
 if %opt%==y goto download
 if %opt%==n goto cancel
@@ -14,7 +14,7 @@ goto :EOF
 
 :download
 cls
-echo Wird heruntergeladen...
+echo Downloading...
 %newuserprofile%\Ungenickt\wget.exe https://raw.githubusercontent.com/FBW81C/TauserTool/main/Tauser_Setup.bat -O%newuserprofile%\Downloads\Tauser.bat -q
 type NUL>%newuserprofile%\Ungenickt\empty.sys
 fc %newuserprofile%\Ungenickt\empty.sys %newuserprofile%\Downloads\Tauser.bat
@@ -23,7 +23,7 @@ goto setdone
 
 :downloaderror
 del %windir%\LockerBlock\Programs\Tauser.bat /Q /F
-echo Fehler beim herunterladen von Tauser
+echo Error while downloading
 echo URL: https://raw.githubusercontent.com/FBW81C/TauserTool/main/Tauser_Setup.bat
 echo DESTINATION: %newuserprofile%\Downloads\Tauser.bat
 pause
