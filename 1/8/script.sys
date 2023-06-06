@@ -9,7 +9,7 @@ echo This Application is only made for Porti.
 pause
 goto :EOF
 
-:cotinue
+:continue
 cls
 echo This will download OpenJDK Microsoft Build for Porti in the Porti Workdir (%portiworkdir%)
 echo Do you want to continue? (y/n)
