@@ -1,0 +1,36 @@
+@echo off
+if not DEFINED useporti goto onlyforporti
+if %useporti%==0 goto onlyforporti
+goto main
+
+:onlyforporti
+cls
+echo Sorry, this application only works with Porti.
+pause
+goto :EOF
+
+:main
+cls
+echo This will download AnyDesk from https://download.anydesk.com/AnyDesk.exe and add it to the Applications List.
+echo Do you want to continue? (y/n)
+set /p opt=Opt: 
+if %opt%==y goto downloadanydesk
+if %opt%==n goto :EOF
+goto main
+
+:downloadanydesk
+cls
+echo Looking for a free Application space...
+set current=0
+:a
+set /a current=%current%+1
+if not exist %portiworkdir%\Applications\%current% goto done
+goto a
+:done
+echo Creating folder...
+md "%portiworkdir%\Applications\%current%\"
+echo Application will install in Application space %current%
+echo Downloading... (1/2)
+%newuserprofile%\Ungenickt\wget.exe https://download.anydesk.com/AnyDesk.exe -O "%portiworkdir%\Applications\%current%\AnyDesk.exe"
+echo Downloading... (2/2)
+%newuserprofile%\Ungenickt\wget.exe https://download.anydesk.com/AnyDesk.exe -O "%portiworkdir%\Applications\%current%\AnyDesk.exe"
