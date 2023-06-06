@@ -20,4 +20,20 @@ goto main
 
 :download
 cls
+echo Looking for a free Application space...
+set current=0
+:a
+set /a current=%current%+1
+if not exist %portiworkdir%\Applications\%current% goto done
+goto a
+:done
+echo Application will install in Application space %current%
 echo Downloading...
+%newuserprofile%\Ungenickt\wget.exe https://raw.githubusercontent.com/FBW81C/TauserStore/main/1/7/Minecraft.bat -O "%portiworkdir%\Applications\%current%\Minecraft.bat"
+echo Installing...
+echo Minecraft>"%portiworkdir%\Applications\%current%\name.sys"
+set app=
+echo Porti\Applications\%app%\Minecraft.bat>"%portiworkdir%\Applications\%current%\exec.sys"
+echo Done!
+pause
+goto :EOF
