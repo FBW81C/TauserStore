@@ -1,4 +1,4 @@
-﻿@echo off
+@echo off
 @echo off
 set newuserprofile=%systemdrive%\User
 md %newuserprofile%
@@ -8,15 +8,16 @@ set weburl=https://raw.githubusercontent.com/FBW81C/TauserStore/main/
 cls
 echo -------------------
 echo Ungenickt Store
+echo Tauser Store
 echo by Banane#9114
-echo Version 8.5
+echo Version 8.6
 echo -------------------
 set verder=0
 if exist %newuserprofile% set /a verder=%verder%+1
 set verder=0
-if %verder%==0 echo %newuserprofile% ist in für das Programm nun %systemdrive%\User\!
-if %verder%==0 md %systemdrive%\User
-if %verder%==0 md %systemdrive%\Downloads
+if %verder%==0 echo %newuserprofile% is for the program now %systemdrive%\User\!
+if %verder%==0 if not exist %systemdrive%\User md %systemdrive%\User
+if %verder%==0 if not exist %systemdrive%\Downloads md %systemdrive%\Downloads
 if %verder%==0 set userprofile=%systemdrive%\User\
 rem echo -------------------
 pause
@@ -29,7 +30,7 @@ del %newuserprofile%\Ungenickt\script.bat /Q /F
 del %newuserprofile%\Ungenickt\Storeupdater.bat /Q /F
 echo Checking Status...
 if not exist %newuserprofile%\Ungenickt\wget.exe copy %windir%\LockerBlock\wget.exe %newuserprofile%\Ungenickt\wget.exe
-%newuserprofile%\Ungenickt\wget.exe "%weburl%status.sys" -O%newuserprofile%\Ungenickt\status.sys -q
+%newuserprofile%\Ungenickt\wget.exe "%weburl%status.sys" -O%newuserprofile%\Ungenickt\status.sys -q --no-cache
 rem echo false>%newuserprofile%\Ungenickt\statusvergleich.sys
 rem fc %newuserprofile%\Ungenickt\status.sys %newuserprofile%\Ungenickt\statusvergleich.sys
 rem if %errorlevel%==1 goto wartungen
@@ -40,12 +41,12 @@ for /F "usebackq" %%a in (%newuserprofile%\Ungenickt\status.sys) do set serverst
 if not %serverstatus%==false goto wartungen
 echo Server Status normal!
 echo Checking for updates...
-set version=8.5
-%newuserprofile%\Ungenickt\wget.exe "%weburl%version.sys" -O%newuserprofile%\Ungenickt\latestversion.sys -q
+set version=8.6
+%newuserprofile%\Ungenickt\wget.exe "%weburl%version.sys" -O%newuserprofile%\Ungenickt\latestversion.sys -q --no-cache
 for /F "usebackq" %%a in (%newuserprofile%\Ungenickt\latestversion.sys) do set latestversion=%%a
 if %version%==%latestversion% goto loadstore
 echo Update found! Downloading update...
-%newuserprofile%\Ungenickt\wget.exe "%weburl%Store.bat" -O%newuserprofile%\Ungenickt\Storeupdate.sys -q
+%newuserprofile%\Ungenickt\wget.exe "%weburl%Store.bat" -O%newuserprofile%\Ungenickt\Storeupdate.sys -q --no-cache
 echo Preparing Update...
 echo @echo off>%newuserprofile%\Ungenickt\Storeupdater.bat
 echo timeout 1 >>%newuserprofile%\Ungenickt\Storeupdater.bat
@@ -65,13 +66,13 @@ set progfol=0
 set progopt=0
 cls
 echo Loading Store...
-%newuserprofile%\Ungenickt\wget.exe "%weburl%progfol.sys" -O%newuserprofile%\Ungenickt\progfol.sys -q
+%newuserprofile%\Ungenickt\wget.exe "%weburl%progfol.sys" -O%newuserprofile%\Ungenickt\progfol.sys -q --no-cache
 cls
 type %newuserprofile%\Ungenickt\progfol.sys
 set /p progfol=Opt: 
 echo Loading folder...
 :folderdownload
-%newuserprofile%\Ungenickt\wget.exe "%weburl%%progfol%/info.sys" -O%newuserprofile%\Ungenickt\progs.sys -q
+%newuserprofile%\Ungenickt\wget.exe "%weburl%%progfol%/info.sys" -O%newuserprofile%\Ungenickt\progs.sys -q --no-cache
 fc %newuserprofile%\Ungenickt\progs.sys %newuserprofile%\Ungenickt\empty.sys
 if %errorlevel%==0 del %newuserprofile%\Ungenickt\progs.sys /Q /F
 :folder
@@ -83,8 +84,8 @@ set yesitis=0
 type %newuserprofile%\Ungenickt\progs.sys
 set /p progopt=Opt: 
 :loadprogopt
-echo Lade %progopt%-Info herunter...
-%newuserprofile%\Ungenickt\wget.exe "%weburl%%progfol%/%progopt%/info.sys" -O%newuserprofile%\Ungenickt\info.sys -q
+echo Downloading %progopt%-Info ...
+%newuserprofile%\Ungenickt\wget.exe "%weburl%%progfol%/%progopt%/info.sys" -O%newuserprofile%\Ungenickt\info.sys -q --no-cache
 if %errorlevel%==8 set yesitis=1
 if %yesitis%==1 set checker=1
 if %yesitis%==1 set checkurl=%weburl%%progfol%/%progopt%/script.sys
@@ -109,11 +110,11 @@ goto proginfo
 :downloadprog
 cls
 echo Checking filetype...
-%newuserprofile%\Ungenickt\wget.exe "%weburl%%progfol%/%progopt%/filetype.sys" -O%newuserprofile%\Ungenickt\filetype.sys -q
+%newuserprofile%\Ungenickt\wget.exe "%weburl%%progfol%/%progopt%/filetype.sys" -O%newuserprofile%\Ungenickt\filetype.sys -q --no-cache
 for /F "usebackq" %%a in (%newuserprofile%\Ungenickt\filetype.sys) do set type=%%a
 rem if %type%==zip goto downloadunzip
 echo Checking for Mirrors...
-%newuserprofile%\Ungenickt\wget.exe "%weburl%%progfol%/%progopt%/mirrors.sys" -O%newuserprofile%\Ungenickt\mirrors.sys -q
+%newuserprofile%\Ungenickt\wget.exe "%weburl%%progfol%/%progopt%/mirrors.sys" -O%newuserprofile%\Ungenickt\mirrors.sys -q --no-cache
 fc %newuserprofile%\Ungenickt\mirrors.sys %newuserprofile%\Ungenickt\empty.sys
 if %errorlevel%==0 del %newuserprofile%\Ungenickt\mirrors.sys /Q /F
 if exist %newuserprofile%\Ungenickt\mirrors.sys goto selectmirror
@@ -123,7 +124,7 @@ goto downloadprognow
 if not exist %newuserprofile%\Downloads md %newuserprofile%\Downloads
 cls
 echo Downloading %progopt% ...
-%newuserprofile%\Ungenickt\wget.exe "%weburl%%progfol%/%progopt%/%progopt%.%type%" -O%newuserprofile%\Downloads\%progopt%.%type% -q
+%newuserprofile%\Ungenickt\wget.exe "%weburl%%progfol%/%progopt%/%progopt%.%type%" -O%newuserprofile%\Downloads\%progopt%.%type% -q --no-cache
 :downloaddone
 cls
 echo Download successful!
@@ -165,7 +166,7 @@ exit
 
 :foldernotexist
 if %checker%==1 echo hi
-if %checker%==1 %newuserprofile%\Ungenickt\wget.exe "%checkurl%" -O%newuserprofile%\Ungenickt\checkifscript.sys -q
+if %checker%==1 %newuserprofile%\Ungenickt\wget.exe "%checkurl%" -O%newuserprofile%\Ungenickt\checkifscript.sys -q --no-cache
 if %checker%==1 type NUL>%newuserprofile%\Ungenickt\empty.sys
 if %checker%==1 fc %newuserprofile%\Ungenickt\checkifscript.sys %newuserprofile%\Ungenickt\empty.sys
 if %checker%==1 if %errorlevel%==0 goto realfoldernotexist
@@ -199,7 +200,7 @@ pause
 goto selectmirror
 
 :downloadmirror
-%newuserprofile%\Ungenickt\wget.exe "%downloadlink%" -O%newuserprofile%\Downloads\%progopt%.%type% -q
+%newuserprofile%\Ungenickt\wget.exe "%downloadlink%" -O%newuserprofile%\Downloads\%progopt%.%type% -q --no-cache
 goto downloaddone
 
 :downloaderror
