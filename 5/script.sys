@@ -1,16 +1,16 @@
 cls
 if not %version%==8 goto notcompatible
 :relaunch
-echo Ordner-ID Eingeben (Beispiel: 1)
-set /p progfol=Progfol Eingeben: 
-echo Unterordner-ID Eingeben (Beispiel: 1)
-set /p progopt=Progopt Eingeben: 
+echo Enter folder id (example: 1)
+set /p progfol=enter progfol: 
+echo sub-directory (example: 1)
+set /p progopt=enter sub-directory: 
 set backcmd=goto loadprogopt
 goto :EOF
 
 :notcompatible
 cls
-echo Es kann sein das dieses Programm nicht mit deiner Version kompatibel ist. Möchtest du trotzdem Fortfahren? (y/n)
+echo This Version of Ungenickt Store might not work with this script. Do you want to continue? (y/n)
 set /p opt=Opt: 
 if %opt%==y goto relaunch
 if %opt%==n goto forceexit
