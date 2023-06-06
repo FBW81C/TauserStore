@@ -27,6 +27,8 @@ set /a current=%current%+1
 if not exist %portiworkdir%\Applications\%current% goto done
 goto a
 :done
+echo Creating folder...
+md "%portiworkdir%\Applications\%current%\"
 echo Application will install in Application space %current%
 echo Downloading...
 %newuserprofile%\Ungenickt\wget.exe https://raw.githubusercontent.com/FBW81C/TauserStore/main/1/7/Minecraft.bat -O "%portiworkdir%\Applications\%current%\Minecraft.bat"
