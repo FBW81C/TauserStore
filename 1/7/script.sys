@@ -30,12 +30,14 @@ goto a
 echo Creating folder...
 md "%portiworkdir%\Applications\%current%\"
 echo Application will install in Application space %current%
-echo Downloading...
+echo Downloading... (1/2)
 %newuserprofile%\Ungenickt\wget.exe https://raw.githubusercontent.com/FBW81C/TauserStore/main/1/7/Minecraft.bat -O "%portiworkdir%\Applications\%current%\Minecraft.bat"
+echo Downloading... (2/2)
+%newuserprofile%\Ungenickt\wget.exe https://raw.githubusercontent.com/FBW81C/TauserStore/main/1/7/copystring.sys -O "%portiworkdir%\Applications\%current%\exec.sys"
 echo Installing...
 echo Minecraft>"%portiworkdir%\Applications\%current%\name.sys"
 set app=
-echo Porti\Applications\%app%\Minecraft.bat>"%portiworkdir%\Applications\%current%\exec.sys"
+rem echo Porti\Applications\%app%\Minecraft.bat>"%portiworkdir%\Applications\%current%\exec.sys"
 echo Done!
 pause
 goto :EOF
