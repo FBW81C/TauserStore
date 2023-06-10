@@ -1,0 +1,56 @@
+@echo off
+if not DEFINED useporti goto onlyforporti
+if %useporti%==0 goto onlyforporti
+goto main
+
+:onlyforporti
+cls
+echo Sorry, this application only works with Porti.
+pause
+goto :EOF
+
+:main
+cls
+echo Welcome!
+echo Here you can install Discord on your Porti Device!
+echo This script will copy your existing Discord installation onto your Porti Drive.
+echo We will close off Discord before starting the copy process.
+echo Do you want to copy the current Discord installation in your Applications folder? (y/n)
+set /p opt=Opt: 
+if %opt%==y goto install
+if %opt%==n goto :EOF
+goto main
+
+:install
+cls
+echo Closing off Discord...
+taskkill /F /IM Discord.exe /T
+cls
+echo Looking for a free application space...
+set current=0
+:a
+set /a current=%current%+1
+if not exist %portiworkdir%\Applications\%current% goto done
+goto a
+
+:done
+if not exist "%localappdata%\Discord" goto discordnotfound
+echo Creating directory %portiworkdir%\Applications\%current% ...
+md %portiworkdir%\Applications\%current%
+echo Starting copy process...
+robocopy "%localappdata%\Discord" %portiworkdir%\Applications\%current%\ /E /R:0 /W:0
+echo Downloading DiscordLauncher.bat ...
+%newuserprofile%\Ungenickt\wget.exe https://raw.githubusercontent.com/FBW81C/TauserStore/main/1/11/DiscordLauncher.bat -O "%portiworkdir%\Applications\%current%\DiscordLauncher.bat"
+echo Downloading copystring...
+%newuserprofile%\Ungenickt\wget.exe https://raw.githubusercontent.com/FBW81C/TauserStore/main/1/11/Minecraft.bat -O "%portiworkdir%\Applications\%current%\Minecraft.bat"
+echo Installing...
+echo Discord>"%portiworkdir%\Applications\%current%\name.sys"
+echo Done!
+pause
+goto :EOF
+
+:discordnotfound
+cls
+echo Unable to find Discord at: %localappdata%\Discord
+pause
+goto :EOF
