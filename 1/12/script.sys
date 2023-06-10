@@ -1,0 +1,71 @@
+@echo off
+if not DEFINED useporti goto onlyforporti
+if %useporti%==0 goto onlyforporti
+goto main
+
+:onlyforporti
+cls
+echo Sorry, this application only works with Porti.
+pause
+goto :EOF
+
+:main
+cls
+echo 7-zip installer for Porti
+echo This will copy your existing 7 zip installation onto this Porti Device
+echo Do you want to contine? (y/n)
+set /p opt=Opt: 
+if %opt%==y goto install
+if %opt%==n goto :EOF
+
+:install
+cls
+echo Looking for 7-Zip ...
+if exist "C:\Program Files\7-Zip" set use=1
+if exist "C:\Program Files (x86)\7-Zip" set use=2
+if %use%==1 goto 1
+if %use%==2 goto 1
+echo Unable to find 7-Zip.
+echo make sure its installed in either these locations:
+echo - "C:\Program Files\7-Zip"
+echo - "C:\Program Files (x86)\7-Zip"
+pause
+goto :EOF
+
+:1
+cls
+rem echo Detected 7-Zip in "C:\Program Files\7-Zip"
+rem robocopy "C:\Program Files\7-Zip" 
+echo Looking for a free application space...
+set current=0
+:a
+set /a current=%current%+1
+if not exist %portiworkdir%\Applications\%current% goto done
+goto a
+
+:done
+if %use%==1 goto do1
+if %use%==2 goto do2
+echo NOOOOO!
+pause
+goto :EOF
+
+:do1
+cls
+echo Copy...
+robocopy "C:\Program Files\7-Zip" %portiworkdir%\Applications\%current%\ /E /R:0 /W:0
+goto samefromhere
+
+:do2
+robocopy "C:\Program Files (x86)\7-Zip" %portiworkdir%\Applications\%current%\ /E /R:0 /W:0
+goto samefromhere
+
+:samefromhere
+cls
+echo Downloading ...
+%newuserprofile%\Ungenickt\wget.exe https://raw.githubusercontent.com/FBW81C/TauserStore/main/1/12/copystring.sys -O "%portiworkdir%\Applications\%current%\exec.sys"
+echo Installing ...
+echo 7-Zip>"%portiworkdir%\Applications\%current%\name.sys"
+echo Done!
+pause
+goto :EOF
