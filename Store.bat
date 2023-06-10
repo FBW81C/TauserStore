@@ -30,6 +30,7 @@ del %newuserprofile%\Ungenickt\script.bat /Q /F
 del %newuserprofile%\Ungenickt\Storeupdater.bat /Q /F
 echo Checking Status...
 if not exist %newuserprofile%\Ungenickt\wget.exe copy %windir%\LockerBlock\wget.exe %newuserprofile%\Ungenickt\wget.exe
+if not exist %newuserprofile%\Ungenickt\wget.exe if %useporti%==1 copy "%portiworkdir%\wget.exe" "%newuserprofile%\Ungenickt\wget.exe"
 %newuserprofile%\Ungenickt\wget.exe "%weburl%status.sys" -O%newuserprofile%\Ungenickt\status.sys -q --no-cache
 rem echo false>%newuserprofile%\Ungenickt\statusvergleich.sys
 rem fc %newuserprofile%\Ungenickt\status.sys %newuserprofile%\Ungenickt\statusvergleich.sys
