@@ -10,7 +10,7 @@ echo -------------------
 echo Ungenickt Store
 echo Tauser Store
 echo by Banane#9114
-echo Version 8.7
+echo Version 8.8
 echo -------------------
 set verder=0
 if exist %newuserprofile% set /a verder=%verder%+1
@@ -42,7 +42,7 @@ for /F "usebackq" %%a in (%newuserprofile%\Ungenickt\status.sys) do set serverst
 if not %serverstatus%==false goto wartungen
 echo Server Status normal!
 echo Checking for updates...
-set version=8.7
+set version=8.8
 %newuserprofile%\Ungenickt\wget.exe "%weburl%version.sys" -O%newuserprofile%\Ungenickt\latestversion.sys -q --no-cache
 for /F "usebackq" %%a in (%newuserprofile%\Ungenickt\latestversion.sys) do set latestversion=%%a
 if %version%==%latestversion% goto loadstore
