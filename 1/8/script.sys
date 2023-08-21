@@ -23,8 +23,10 @@ rem powershell Expand-Archive microsoft-jdk-17.0.7-windows-x64.zip -DestinationP
 echo Step 1: Downloading Java from https://aka.ms/download-jdk/microsoft-jdk-17.0.7-windows-x64.zip ...
 %newuserprofile%\Ungenickt\wget.exe https://aka.ms/download-jdk/microsoft-jdk-17.0.7-windows-x64.zip -O "%portiworkdir%\Java.zip"
 echo Step 2: Extracting ...
+if exist "%portiworkdir%\unzip.exe" goto useunzip
 powershell Expand-Archive "%portiworkdir%\Java.zip" -DestinationPath "%portiworkdir%\Java"
 if not exist "%portiworkdir%\Java" goto oldpowershell
+:done
 echo Step 3: Deleting Java.zip ...
 del "%portiworkdir%\Java.zip" /Q /F
 echo Done!
@@ -37,3 +39,9 @@ echo into the Java folder on the same directory (%portiworkdir%)
 echo After that you should be done and all your Java applications should work in Porti.
 pause
 goto :EOF
+
+:useunzip
+"%portiworkdir%\unzip.exe" "%portiworkdir%\Java.zip"
+md "%portiworkdir\Java"
+move "%portiworkdir\jdk-17.0.7+7" "%portiworkdir%\Java\"
+goto done
