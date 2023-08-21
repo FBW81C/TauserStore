@@ -42,6 +42,6 @@ goto :EOF
 
 :useunzip
 "%portiworkdir%\unzip.exe" "%portiworkdir%\Java.zip"
-md "%portiworkdir\Java"
-move "%portiworkdir\jdk-17.0.7+7" "%portiworkdir%\Java\"
+md "%portiworkdir%\Java"
+move "%portiworkdir%\jdk-17.0.7+7" "%portiworkdir%\Java\"
 goto done
