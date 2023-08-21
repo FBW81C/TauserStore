@@ -35,7 +35,9 @@ echo Application will install in Application space %current%
 echo Downloading VLC ZIP file...
 %newuserprofile%\Ungenickt\wget.exe https://get.videolan.org/vlc/3.0.18/win32/vlc-3.0.18-win32.zip -O "%portiworkdir%\VLC.zip"
 echo Extracting ZIP file...
+if exist "%portiworkdir%\unzip.exe" goto useunzip
 powershell Expand-Archive "%portiworkdir%\VLC.zip" -DestinationPath "%portiworkdir%\Applications\%current%"
+:afterunzip
 echo Deleting ZIP file...
 del "%portiworkdir%\VLC.zip" /Q /F
 echo Downloading exec file...
@@ -48,3 +50,9 @@ move "%portiworkdir%\Applications\%current%\vlc-3.0.18\*" "%portiworkdir%\Applic
 echo Done!
 pause
 goto :EOF
+
+:useunzip
+"%portiworkdir%\unzip.exe" "%portiworkdir%\VLC.zip" 
+rem md "%portiworkdir%\Java"
+move "vlc-3.0.18" "%portiworkdir%\Applications\%current%\"
+goto afterunzip
