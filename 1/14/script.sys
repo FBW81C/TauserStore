@@ -42,7 +42,7 @@ echo Done!
 pause
 goto :EOF
 :update
-set current=
+set current=%cur%
 echo Updating...
 echo @echo off >%portiworkdir%\Applications\%current%\Test.bat
 echo echo Test Application Ver.1 >>%portiworkdir%\Applications\%current%\Test.bat
@@ -51,5 +51,4 @@ echo exit >>%portiworkdir%\Applications\%current%\Test.bat
 echo 1.1 >%portiworkdir%\Applications\%current%\version.tauserstore
 set updatecompleted=1
 echo Done!
-pause
 goto :EOF
