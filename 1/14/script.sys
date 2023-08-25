@@ -1,0 +1,31 @@
+@echo off
+if not DEFINED useporti goto onlyforporti
+if %useporti%==0 goto onlyforporti
+goto main
+
+:onlyforporti
+cls
+echo Sorry, this application only works with Porti.
+pause
+goto :EOF
+
+:main
+cls
+echo This is just a testing program to check if the Tauser Updater can find updates.
+echo Do you want to install this? (y/n)
+set /p opt=Opt: 
+if %opt%==y goto install
+if %opt%==n goto :EOF
+goto main
+
+:install
+cls
+echo Looking for a free Application space...
+set current=0
+:a
+set /a current=%current%+1
+if not exist %portiworkdir%\Applications\%current% goto done
+goto a
+
+:done
+echo Download in progress...
