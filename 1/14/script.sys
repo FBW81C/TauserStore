@@ -38,6 +38,7 @@ echo 1/14>>%portiworkdir%\Applications\%current%\AppID.tauserstore
 echo test application >%portiworkdir%\Applications\%current%\name.sys
 rem https://raw.githubusercontent.com/FBW81C/TauserStore/main/1/14/copystring.sys
 %newuserprofile%\Ungenickt\wget.exe https://raw.githubusercontent.com/FBW81C/TauserStore/main/1/14/copystring.sys -O "%portiworkdir%\Applications\%current%\exec.sys"
+echo 1.0 >%portiworkdir%\Applications\%current%\version.tauserstore
 echo Done!
 pause
 goto :EOF
