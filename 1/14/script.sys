@@ -34,7 +34,7 @@ echo Installation in Progress...
 echo echo Test Application Ver.1 >%portiworkdir%\Applications\%current%\Test.bat
 echo pause >>%portiworkdir%\Applications\%current%\Test.bat
 echo exit >>%portiworkdir%\Applications\%current%\Test.bat
-echo 1/14>>%portiworkdir%\Applications\%current%\AppID.tauserstore
+echo 1/14>%portiworkdir%\Applications\%current%\AppID.tauserstore
 echo test application >%portiworkdir%\Applications\%current%\name.sys
 rem https://raw.githubusercontent.com/FBW81C/TauserStore/main/1/14/copystring.sys
 %newuserprofile%\Ungenickt\wget.exe https://raw.githubusercontent.com/FBW81C/TauserStore/main/1/14/copystring.sys -O "%portiworkdir%\Applications\%current%\exec.sys"
