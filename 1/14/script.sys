@@ -46,7 +46,7 @@ goto :EOF
 set current=%cur%
 echo Updating...
 echo @echo off >%portiworkdir%\Applications\%current%\Test.bat
-echo echo Test Application Ver.1 >>%portiworkdir%\Applications\%current%\Test.bat
+echo echo Test Application Ver.1.1 >>%portiworkdir%\Applications\%current%\Test.bat
 echo pause >>%portiworkdir%\Applications\%current%\Test.bat
 echo exit >>%portiworkdir%\Applications\%current%\Test.bat
 echo 1.1 >%portiworkdir%\Applications\%current%\version.tauserstore
