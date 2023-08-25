@@ -10,6 +10,7 @@ pause
 goto :EOF
 
 :main
+if defined updatecompleted goto update
 cls
 echo This will download the installation package in your Applications folder.
 echo Proceed? (y/n)
@@ -38,6 +39,15 @@ echo Installing...
 echo Minecraft>"%portiworkdir%\Applications\%current%\name.sys"
 set app=
 rem echo Porti\Applications\%app%\Minecraft.bat>"%portiworkdir%\Applications\%current%\exec.sys"
+echo 1/7>%portiworkdir%\Applications\%current%\AppID.tauserstore
+echo 1.1 >%portiworkdir%\Applications\%current%\version.tauserstore
 echo Done!
+pause
+goto :EOF
+
+:update
+set current=%cur%
+del "%portiworkdir%\Applications\%current%\Minecraft.bat" /Q /F
+goto done
 pause
 goto :EOF
