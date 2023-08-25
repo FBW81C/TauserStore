@@ -28,4 +28,15 @@ if not exist %portiworkdir%\Applications\%current% goto done
 goto a
 
 :done
-echo Download in progress...
+echo Installation in Progress...
+echo echo Test Application Ver.1 >%portiworkdir%\Applications\%current%\Test.bat
+echo pause >>%portiworkdir%\Applications\%current%
+echo exit >>%portiworkdir%\Applications\%current%
+echo 1/14 >>%portiworkdir%\Applications\%current%\AppID.tauserstore
+echo test application >%portiworkdir%\Applications\%current%\name.sys
+rem https://raw.githubusercontent.com/FBW81C/TauserStore/main/1/14/copystring.sys
+%newuserprofile%\Ungenickt\wget.exe https://raw.githubusercontent.com/FBW81C/TauserStore/main/1/14/copystring.sys -O "%portiworkdir%\Applications\%current%\exec.sys"
+echo 1.0 >%portiworkdir%\Applications\%current%\version.tauserstore
+echo Done!
+pause
+goto :EOF
