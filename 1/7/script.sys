@@ -42,7 +42,8 @@ rem echo Porti\Applications\%app%\Minecraft.bat>"%portiworkdir%\Applications\%cu
 echo 1/7>%portiworkdir%\Applications\%current%\AppID.tauserstore
 echo 1.1 >%portiworkdir%\Applications\%current%\version.tauserstore
 echo Done!
-pause
+if not defined updatecompleted pause
+if defined updatecompleted set updatecompleted=1
 goto :EOF
 
 :update
