@@ -31,13 +31,15 @@ goto a
 :done
 md %portiworkdir%\Applications\%current%
 echo Installation in Progress...
-echo echo Test Application Ver.1 >%portiworkdir%\Applications\%current%\Test.bat
+echo @echo off>%portiworkdir%\Applications\%current%\Test.bat
+echo echo Test Application Ver.1 >>%portiworkdir%\Applications\%current%\Test.bat
+echo echo Now use the Tauser Store Updater to check for updates! >>%portiworkdir%\Applications\%current%\Test.bat
 echo pause >>%portiworkdir%\Applications\%current%\Test.bat
 echo exit >>%portiworkdir%\Applications\%current%\Test.bat
 echo 1/14>%portiworkdir%\Applications\%current%\AppID.tauserstore
 echo test application >%portiworkdir%\Applications\%current%\name.sys
 rem https://raw.githubusercontent.com/FBW81C/TauserStore/main/1/14/copystring.sys
-%newuserprofile%\Ungenickt\wget.exe https://raw.githubusercontent.com/FBW81C/TauserStore/main/1/14/copystring.sys -O "%portiworkdir%\Applications\%current%\exec.sys"
+%newuserprofile%\Ungenickt\wget.exe https://raw.githubusercontent.com/FBW81C/TauserStore/main/1/14/copystring.sys -O "%portiworkdir%\Applications\%current%\exec.sys" -q
 echo 1.0 >%portiworkdir%\Applications\%current%\version.tauserstore
 echo Done!
 pause
@@ -47,6 +49,7 @@ set current=%cur%
 echo Updating...
 echo @echo off >%portiworkdir%\Applications\%current%\Test.bat
 echo echo Test Application Ver.1.1 >>%portiworkdir%\Applications\%current%\Test.bat
+echo echo Nice! You have updated Porti! >>%portiworkdir%\Applications\%current%\Test.bat
 echo pause >>%portiworkdir%\Applications\%current%\Test.bat
 echo exit >>%portiworkdir%\Applications\%current%\Test.bat
 echo 1.1 >%portiworkdir%\Applications\%current%\version.tauserstore
