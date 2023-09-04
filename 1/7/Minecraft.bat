@@ -61,6 +61,7 @@ goto reload
 cls
 echo Do you want to delete Minecraft.exe and / or olauncher.jar ? (y/n)
 echo NOTE: Make sure to close off the Minecraft Launcher before you proceed.
+echo also, the launcher_profiles file will be deleted.
 set /p opt=Opt: 
 if %opt%==y goto delmcexe
 if %opt%==n goto reload
@@ -69,6 +70,7 @@ goto confirmation2
 :delmcexe
 del %appdir%\Minecraft.exe /Q /F
 del %appdir%\olauncher.jar /Q /F
+del %appdir%\launcher_profiles.json /Q /F
 echo Done!
 pause
 goto reload
