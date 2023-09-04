@@ -40,7 +40,7 @@ echo Minecraft>"%portiworkdir%\Applications\%current%\name.sys"
 set app=
 rem echo Porti\Applications\%app%\Minecraft.bat>"%portiworkdir%\Applications\%current%\exec.sys"
 echo 1/7>%portiworkdir%\Applications\%current%\AppID.tauserstore
-echo 1.1 >%portiworkdir%\Applications\%current%\version.tauserstore
+echo 1.2 >%portiworkdir%\Applications\%current%\version.tauserstore
 echo Done!
 if not defined updatecompleted pause
 if defined updatecompleted set updatecompleted=1
