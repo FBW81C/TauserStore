@@ -7,7 +7,7 @@ echo Application Directory: %appdir%
 echo Minecraft workDir: %appdir%\MCInstall
 set exist=0
 echo Porti WorkDir: %portiworkdir%
-echo App Version 1.1
+echo App Version 1.2
 if exist %appdir%\Minecraft.exe echo 1) Start Minecraft Launcher
 if exist %appdir%\olauncher.jar echo 1) Start Minecraft Launcher (UNOFFICIAL)
 if exist %appdir%\Minecraft.exe set exist=1
