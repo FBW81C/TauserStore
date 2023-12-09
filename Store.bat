@@ -5,11 +5,12 @@ md %newuserprofile%
 :login
 title Tauser Store
 set weburl=https://raw.githubusercontent.com/FBW81C/TauserStore/main/
+color 20
 cls
 echo -------------------
 echo Tauser Store
-echo by Banane#9114
-echo Version 8.9
+echo by Banane#9114 (jangames)
+echo Version 8.99
 echo -------------------
 set verder=0
 if exist %newuserprofile% set /a verder=%verder%+1
@@ -23,11 +24,15 @@ pause
 :directlogin
 if not exist %newuserprofile%\Ungenickt md %newuserprofile%\Ungenickt
 if not exist %newuserprofile%\Downloads md %newuserprofile%\Downloads
+cls
+color 2
 echo Deleting Cache...
-del %newuserprofile%\Ungenickt\*.sys /Q /F
-del %newuserprofile%\Ungenickt\script.bat /Q /F
-del %newuserprofile%\Ungenickt\Storeupdater.bat /Q /F
-echo Checking Status...
+del %newuserprofile%\Ungenickt\*.sys /Q /F >NUL
+if exist %newuserprofile%\Ungenickt\script.bat del %newuserprofile%\Ungenickt\script.bat /Q /F >NUL
+if exist %newuserprofile%\Ungenickt\Storeupdater.bat del %newuserprofile%\Ungenickt\Storeupdater.bat /Q /F >NUL
+cls
+color e
+echo Connecting to server...
 if not exist %newuserprofile%\Ungenickt\wget.exe copy %windir%\LockerBlock\wget.exe %newuserprofile%\Ungenickt\wget.exe
 if not exist %newuserprofile%\Ungenickt\wget.exe if %useporti%==1 copy "%portiworkdir%\wget.exe" "%newuserprofile%\Ungenickt\wget.exe"
 %newuserprofile%\Ungenickt\wget.exe "%weburl%status.sys" -O%newuserprofile%\Ungenickt\status.sys -q --no-cache
@@ -39,18 +44,21 @@ type %newuserprofile%\Ungenickt\status.sys | findstr /C "false"
 if not %errorlevel%==0 goto offline
 for /F "usebackq" %%a in (%newuserprofile%\Ungenickt\status.sys) do set serverstatus=%%a
 if not %serverstatus%==false goto wartungen
-echo Server Status normal!
+cls
+echo Connected to server!
 :check4updates
+cls
 echo Checking for updates...
-set version=8.9
+set version=8.99
 %newuserprofile%\Ungenickt\wget.exe "%weburl%version.sys" -O%newuserprofile%\Ungenickt\latestversion.sys -q --no-cache
 for /F "usebackq" %%a in (%newuserprofile%\Ungenickt\latestversion.sys) do set latestversion=%%a
 if %version%==%latestversion% goto loadstore
 goto askifuwant2update
 :downloadupdate
-echo Update found! Downloading update...
+cls
+echo Downloading update...
 %newuserprofile%\Ungenickt\wget.exe "%weburl%Store.bat" -O%newuserprofile%\Ungenickt\Storeupdate.sys -q --no-cache
-echo Preparing Update...
+echo Writing Updater-Script...
 echo @echo off>%newuserprofile%\Ungenickt\Storeupdater.bat
 echo timeout 1 >>%newuserprofile%\Ungenickt\Storeupdater.bat
 echo echo Updating Ungenickt Store>>%newuserprofile%\Ungenickt\Storeupdater.bat
@@ -68,12 +76,23 @@ set checker=0
 set progfol=0
 set progopt=0
 cls
-echo Loading Store...
+color e
+echo Requesting store page...
 %newuserprofile%\Ungenickt\wget.exe "%weburl%progfol.sys" -O%newuserprofile%\Ungenickt\progfol.sys -q --no-cache
+cls
+echo Requesting preperation script...
+%newuserprofile%\Ungenickt\wget.exe "%weburl%sysprep.sys" -O%newuserprofile%\Ungenickt\sysprep.bat -q --no-cache
+find "@echo off" %newuserprofile%\Ungenickt\sysprep.bat >NUL
+if %errorlevel%==0 goto runprep
+
+:afterprep
+color
 title Tauser Store: Main Menu (Connected)
 cls
 type %newuserprofile%\Ungenickt\progfol.sys
 set /p progfol=Opt: 
+cls
+color e
 echo Loading folder...
 title Tauser Store: Download in Progress...
 :folderdownload
@@ -84,7 +103,9 @@ if %errorlevel%==0 del %newuserprofile%\Ungenickt\progs.sys /Q /F
 if not exist %newuserprofile%\Ungenickt\progs.sys set checker=1
 if not exist %newuserprofile%\Ungenickt\progs.sys set checkurl=%weburl%%progfol%/script.sys
 if not exist %newuserprofile%\Ungenickt\progs.sys goto foldernotexist
+title Tauser Store: Connected! (DIR: %weburl%%progfol%/)
 cls
+color
 set yesitis=0
 type %newuserprofile%\Ungenickt\progs.sys
 set /p progopt=Opt: 
@@ -160,6 +181,7 @@ goto login
 :wartungen
 title Tauser Store: Maintenance
 cls
+color c
 if %serverstatus%==mainreason goto mainreason
 echo The Server is currently in maintenance mode!
 echo Server status: %serverstatus%
@@ -226,20 +248,26 @@ goto selectmirror
 goto downloaddone
 
 :downloaderror
-echo Oh oh! An error occoured!
+echo An error occoured while downloading the file.
+echo Press any key to reveal technical details.
+pause >NUL
+cls
 echo Technical details:
 echo --------------
 set
 echo --------------
-pause
+echo Press any key to reload TauserStore.
+pause >NUL
 goto login
 
 :mainreason
 cls
+color e
 echo The server is in maintenance mode!
 echo Downloading details, please wait!
 %newuserprofile%\Ungenickt\wget.exe "%weburl%reason.sys" -O%newuserprofile%\Ungenickt\reason.sys -q --no-cache
 cls
+color c
 echo The server is currently in maintenance mode!
 echo.
 echo --------------------------------------------
@@ -257,6 +285,9 @@ goto mainreason
 
 :askifupdate
 cls
+color 4
+echo Bypass Maintenance Mode
+echo Do you want to check for updates?
 echo 1) Skip Updates
 echo 2) Check for Updates
 set /p opt=Opt: 
@@ -266,14 +297,26 @@ goto askifupdate
 
 :askifuwant2update
 cls
-echo An update is avaivable!
+color a
+echo An update is available!
 echo It is recommended to download updates.
-echo Please select an option
+echo Do you want to download the update?
 echo 1) Download update
 echo 2) Continue without update
 echo 3) Exit
-set /p opt=Opt:
+set /p opt=Opt: 
 if %opt%==1 goto downloadupdate
 if %opt%==2 goto loadstore
 if %opt%==3 exit
 goto askifuwant2update
+
+:runprep
+color e
+call %newuserprofile%\Ungenickt\sysprep.bat
+if not defined exitcmd goto noexitcmd
+%exitcmd%
+
+:noexitcmd
+color c
+echo No valid prep-point found.
+goto afterprep
