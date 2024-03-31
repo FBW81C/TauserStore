@@ -112,7 +112,7 @@ goto reload
 cls
 echo Java has been detected in "%portiworkdir%\Java\jdk-17.0.7+7\bin\java.exe"
 echo Downloading olauncher from github...
-"%portiworkdir%\wget.exe" https://github.com/olauncher/olauncher/releases/download/v1.7.2_10/olauncher-1.7.2_10-redist.jar -O "%cd%\%appdir%\olauncher.jar"
+"%portiworkdir%\wget.exe" https://github.com/olauncher/olauncher/releases/download/v1.7.2_11/olauncher-1.7.2_11-redist.jar -O "%cd%\%appdir%\olauncher.jar"
 echo Done!
 pause
 goto reload
