@@ -7,7 +7,7 @@ echo Application Directory: %appdir%
 echo Minecraft workDir: %appdir%\MCInstall
 set exist=0
 echo Porti WorkDir: %portiworkdir%
-echo App Version 1.4
+echo App Version 1.5
 if exist %appdir%\Minecraft.exe echo 1) Start Minecraft Launcher
 if exist %appdir%\olauncher.jar echo 1) Start Minecraft Launcher (UNOFFICIAL)
 if exist %appdir%\Minecraft.exe set exist=1
@@ -112,7 +112,7 @@ goto reload
 cls
 echo Java has been detected in "%portiworkdir%\Java\jdk-17.0.7+7\bin\java.exe"
 echo Downloading olauncher from github...
-"%portiworkdir%\wget.exe" https://github.com/olauncher/olauncher/releases/download/v1.7.2_11/olauncher-1.7.2_11-redist.jar -O "%cd%\%appdir%\olauncher.jar"
+"%portiworkdir%\wget.exe" https://github.com/olauncher/olauncher/releases/download/v1.7.3/olauncher-1.7.3-redist.jar -O "%cd%\%appdir%\olauncher.jar"
 echo Done!
 pause
 goto reload
