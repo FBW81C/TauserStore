@@ -7,7 +7,7 @@ echo Application Directory: %appdir%
 echo Minecraft workDir: %appdir%\MCInstall
 set exist=0
 echo Porti WorkDir: %portiworkdir%
-echo App Version 1.5
+echo App Version 1.6
 if exist %appdir%\Minecraft.exe echo 1) Start Minecraft Launcher
 if exist %appdir%\olauncher.jar echo 1) Start Minecraft Launcher (UNOFFICIAL)
 if exist %appdir%\Minecraft.exe set exist=1
@@ -61,7 +61,6 @@ goto reload
 cls
 echo Do you want to delete Minecraft.exe and / or olauncher.jar ? (y/n)
 echo NOTE: Make sure to close off the Minecraft Launcher before you proceed.
-echo also, the launcher_profiles file will be deleted.
 set /p opt=Opt: 
 if %opt%==y goto delmcexe
 if %opt%==n goto reload
@@ -70,7 +69,7 @@ goto confirmation2
 :delmcexe
 del %appdir%\Minecraft.exe /Q /F
 del %appdir%\olauncher.jar /Q /F
-del %appdir%\launcher_profiles.json /Q /F
+rem del %appdir%\launcher_profiles.json /Q /F
 echo Done!
 pause
 goto reload
@@ -112,7 +111,7 @@ goto reload
 cls
 echo Java has been detected in "%portiworkdir%\Java\jdk-17.0.7+7\bin\java.exe"
 echo Downloading olauncher from github...
-"%portiworkdir%\wget.exe" https://github.com/olauncher/olauncher/releases/download/v1.7.3/olauncher-1.7.3-redist.jar -O "%cd%\%appdir%\olauncher.jar"
+"%portiworkdir%\wget.exe" https://github.com/olauncher/olauncher/releases/download/v1.7.3_01/olauncher-1.7.3_01-redist.jar -O "%cd%\%appdir%\olauncher.jar"
 echo Done!
 pause
 goto reload
