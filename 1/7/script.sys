@@ -1,4 +1,12 @@
 @echo off
+echo This is a legacy application and is no longer maintained. Please switch to a maintained version.
+echo Do you want to proceed? (y/n)
+set /p opt=Opt: 
+if %opt%==y goto conporti
+if %opt%==n goto :EOF
+goto :EOF
+
+:conporti
 if not DEFINED useporti goto onlyforporti
 if %useporti%==0 goto onlyforporti
 goto main
