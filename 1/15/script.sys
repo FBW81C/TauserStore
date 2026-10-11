@@ -1,0 +1,35 @@
+@echo off
+:reload
+cls
+echo Welcome to DevBatchLoader!
+echo Use this tool to test how Scripts behave before releasing them to TauserStore!
+echo Current Directory: %cd%
+echo.
+echo Select an option:
+echo 1) Load Script
+echo 2) Inline CMD
+echo 3) Return to TauserStore
+set /p opt=Opt: 
+if %opt%==1 goto loadscript
+if %opt%==2 goto inlinecmd
+if %opt%==3 goto :eof
+echo No valid option has been selected.
+pause
+goto reload
+
+:loadscript
+echo Enter the path to your batch script to load it via call.
+set /p call=call: 
+call %call%
+echo Script returned with error code %errorlevel%
+pause
+goto reload
+
+:inlinecmd
+echo You are now inside of the inline cmd.
+echo To return, use the command: goto reload
+echo.
+:loopcmd
+set /p inlinecmd=%cd%^>
+%inlinecmd%
+goto loopcmd
